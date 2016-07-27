@@ -1,6 +1,6 @@
 {
   "name": "little-man-computer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Little Man Computer emulator for Node",
   "main": "index.js",
   "scripts": {
