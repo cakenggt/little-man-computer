@@ -12,7 +12,7 @@
 ### Computer
 `Computer` is a constructor that is used to create a Little Man Computer. This constructor takes an options argument defined below.
 #### options
-* `inbox` An array with the inputs for the program. If this array doesn't exist or is too small when the computer requires an input, the program will pause for a `stdin` input.
+* `inbox` An array with the inputs for the program. If this array doesn't exist or is too small when the computer requires an input, the program will thrown an error.
 * `mailboxes` An array with the numeric codes that make up the program.
 * `logOutbox` Boolean value specifying whether or not to log outputs as they happen to `console.log`. Defaults to `false`
 
