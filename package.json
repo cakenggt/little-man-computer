@@ -1,0 +1,19 @@
+{
+  "name": "little-man-computer",
+  "version": "0.0.1",
+  "description": "Little Man Computer emulator for Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "Little-Man-Computer",
+    "assembly"
+  ],
+  "author": "Alec Lownes",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
