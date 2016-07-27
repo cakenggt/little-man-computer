@@ -4,7 +4,7 @@
 
 ## Specifications
 ### assemble
-`assemble` is a function which takes in a string of newline-delimited Mnemonic, or Numeric, instructions. Labels can also be used.
+`assemble` is a function which takes in a string of newline-delimited Mnemonic, or Numeric, instructions, with or without labels, and outputs an array of numeric instructions.
 
 ### commands
 `commands` is an enum mapping each mnemonic to it's command code. For example, `ADD` is mapped to `100`
