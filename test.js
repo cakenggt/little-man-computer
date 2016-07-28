@@ -117,4 +117,34 @@ describe('assemble and computer', function(){
     computer.run();
     expect(computer.outbox).to.deep.equal(test);
   });
+  it('divide', function(){
+    let subtract = `INP
+          STA NUM
+          INP
+          STA DENOM
+          LDA NUM
+    LOOP  SUB DENOM
+          STA NUM
+          LDA COUNT
+          ADD ONE
+          STA COUNT
+          LDA NUM
+          BRP LOOP
+          LDA COUNT
+          SUB ONE
+          OUT
+          HLT
+    NUM   DAT
+    DENOM DAT
+    COUNT DAT
+    ONE   DAT 1`;
+    let assembled = LMC.assemble(subtract);
+    let computer = new LMC.Computer({
+      mailboxes: assembled,
+      inbox: [10,2],
+      logOutbox: false
+    });
+    computer.run();
+    expect(computer.outbox).to.deep.equal([5]);
+  });
 });
