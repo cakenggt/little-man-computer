@@ -97,4 +97,24 @@ describe('assemble and computer', function(){
     computer.run();
     expect(computer.outbox).to.deep.equal([25,36,49]);
   });
+  it('quine', function(){
+    let quine = `LOAD LDA 0
+        OUT
+        SUB ONE
+        BRZ ONE
+        LDA LOAD
+        ADD ONE
+        STA LOAD
+        BRA LOAD
+    ONE DAT 1`;
+    let assembled = LMC.assemble(quine);
+    let test = assembled.slice();
+    let computer = new LMC.Computer({
+      mailboxes: assembled,
+      inbox: [5,6,7,0],
+      logOutbox: false
+    });
+    computer.run();
+    expect(computer.outbox).to.deep.equal(test);
+  });
 });

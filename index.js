@@ -19,61 +19,64 @@ class Computer {
     }
     while(steps !== 0){
       let executedIndex = this.programCounter;
-      let command = this.mailboxes[executedIndex];
-      if (command === undefined){
-        throw new Error('Undefined command found at index: ' + executedIndex);
+      let contents = this.mailboxes[executedIndex];
+      if (contents === undefined){
+        throw new Error('Undefined contents found at index: ' + executedIndex);
       }
-      else if (command < 0 || command >= 1000){
-        throw new Error('Command not in command range: ' + command);
+      else if (contents < 0 || contents >= 1000){
+        throw new Error('Contents not in command range: ' + contents);
       }
-      let address = command%100;
+      let command = Math.floor(contents/100)*100;
+      let address = contents%100;
       this.programCounter++;
-      if (command === 0){
-        //HLT/COB
-        break;
-      }
-      else if (command >= commands.ADD && command < commands.ADD+100){
-        //ADD explicitly doesn't include the DAT command
-        this.accumulator += this.mailboxes[address];
-      }
-      else if (command < commands.SUB+100){
-        //SUB
-        this.accumulator -= this.mailboxes[address];
-      }
-      else if (command < commands.STA+100){
-        this.mailboxes[address] = this.accumulator;
-      }
-      else if (command < commands.LDA+100){
-        this.accumulator = this.mailboxes[address];
-      }
-      else if (command < commands.BRA+100){
-        this.programCounter = address;
-      }
-      else if (command < commands.BRZ+100){
-        if (this.accumulator === 0){
+      switch(command){
+        case commands.HLT:
+          return;
+        case commands.ADD:
+          this.accumulator += this.mailboxes[address];
+          break;
+        case commands.SUB:
+          this.accumulator -= this.mailboxes[address];
+          break;
+        case commands.STA:
+          this.mailboxes[address] = this.accumulator;
+          break;
+        case commands.LDA:
+          this.accumulator = this.mailboxes[address];
+          break;
+        case commands.BRA:
           this.programCounter = address;
-        }
-      }
-      else if (command < commands.BRP+100){
-        if (this.accumulator >= 0){
-          this.programCounter = address;
-        }
-      }
-      else if (command === commands.INP){
-        let input = this.inbox[this.inboxIndex];
-        if (input !== undefined){
-          this.inboxIndex++;
-          this.accumulator = input;
-        }
-        else{
-          throw new Error('No input at inbox index: ' + this.inboxIndex);
-        }
-      }
-      else if (command === commands.OUT){
-        this.outbox.push(this.accumulator);
-        if (this.logOutbox){
-          console.log(this.accumulator);
-        }
+          break;
+        case commands.BRZ:
+          if (this.accumulator === 0){
+            this.programCounter = address;
+          }
+          break;
+        case commands.BRP:
+          if (this.accumulator >= 0){
+            this.programCounter = address;
+          }
+          break;
+        case 900:
+          if (contents == commands.INP){
+            let input = this.inbox[this.inboxIndex];
+            if (input !== undefined){
+              this.inboxIndex++;
+              this.accumulator = input;
+            }
+            else{
+              throw new Error('No input at inbox index: ' + this.inboxIndex);
+            }
+          }
+          else if (contents == commands.OUT){
+            this.outbox.push(this.accumulator);
+            if (this.logOutbox){
+              console.log(this.accumulator);
+            }
+          }
+          break;
+        default:
+          throw new Error('Command code is not registered: ' + command);
       }
 
       //Set accumulator to -1 if out of bounds
