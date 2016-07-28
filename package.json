@@ -13,7 +13,12 @@
   "author": "Alec Lownes",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^13.1.0",
     "chai": "^3.5.0",
     "mocha": "^2.5.3"
+  },
+  "private": true,
+  "scripts": {
+    "brow": "browserify page.js -o bundle.js"
   }
 }

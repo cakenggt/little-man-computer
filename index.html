@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Little Man Computer</title>
+    <script src="bundle.js" charset="utf-8"></script>
+    <style media="screen">
+      .state {
+        display: inline-block;
+      }
+      .data {
+        display: inline-block;
+      }
+      .selected {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="state">
+      Accumulator: <span id="accumulator"></span><br>
+      Source <br>
+      <textarea id="source" rows="8" cols="40"></textarea><br>
+      Inbox <input type="text" id="inbox"><br>
+      <button type="button" id="assemble">Assemble</button>
+      <button type="button" id="run">Run</button>
+      <button type="button" id="step">Step</button><br>
+      Outbox <span id="outbox"></span>
+    </div>
+    <div class="data">
+      <table id="cells"></table>
+    </div>
+  </body>
+</html>
