@@ -17,7 +17,7 @@
 * `logOutbox` Boolean value specifying whether or not to log outputs as they happen to `console.log`. Defaults to `false`
 
 The methods and attributes in the `Computer` object are defined below
-#### `run()`
+### `run()`
 This method runs the computer until it reaches a halt statement.
 
 ### `step(steps=1)`
